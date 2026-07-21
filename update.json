@@ -1,0 +1,11 @@
+{
+  "version": "0.2.6",
+  "notes": "Keystroke Tracker version 0.2.6 update description.",
+  "pub_date": "2026-07-21T09:40:00Z",
+  "platforms": {
+    "windows-x86_64": {
+      "signature": "PLACEHOLDER_SIGNATURE_FROM_TAURI_ACTION_OR_CLI_BUILD",
+      "url": "https://github.com/rithvikrthampy/keystroke-widget/releases/download/v0.2.6/KeystrokeTracker_0.2.6_x64_en-US.msi.zip"
+    }
+  }
+}

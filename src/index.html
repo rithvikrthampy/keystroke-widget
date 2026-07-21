@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Keystroke Tracker</title>
+    <!-- Modern Clean Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="/main.js" defer></script>
+  </head>
+
+  <body>
+    <!-- Main Widget Container -->
+    <div class="widget-container theme-cyan" id="widget-container">
+      
+      <!-- Top goal progress track (1px / 2px thin line across top of widget) -->
+      <div class="progress-bar-container" id="progress-bar-container">
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-fill-bar" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- Header -->
+      <header class="widget-header" data-tauri-drag-region>
+        <div class="sys-title" data-tauri-drag-region>
+          <span class="status-indicator"></span>
+          <span class="header-title" data-tauri-drag-region>Keystrokes</span>
+        </div>
+        <div class="window-controls">
+          <button class="win-btn" id="btn-settings" title="Settings">
+            <!-- Sleek settings cog svg -->
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12.22 2h-.44a2 2 0 00-2 2v.18a2 2 0 01-1 1.73l-.43.25a2 2 0 01-2 0l-.15-.08a2 2 0 00-2.73.73l-.22.38a2 2 0 00.73 2.73l.15.1a2 2 0 011 1.72v.51a2 2 0 01-1 1.74l-.15.09a2 2 0 00-.73 2.73l.22.38a2 2 0 002.73.73l.15-.08a2 2 0 012 0l.43.25a2 2 0 011 1.73V20a2 2 0 002 2h.44a2 2 0 002-2v-.18a2 2 0 011-1.73l.43-.25a2 2 0 012 0l.15.08a2 2 0 002.73-.73l.22-.39a2 2 0 00-.73-2.73l-.15-.08a2 2 0 01-1-1.74v-.5a2 2 0 011-1.74l.15-.1a2 2 0 00.73-2.73l-.22-.38a2 2 0 00-2.73-.73l-.15.08a2 2 0 01-2 0l-.43-.25a2 2 0 01-1-1.73V4a2 2 0 00-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+          <button class="win-btn" id="btn-minimize" title="Minimize">
+            <svg width="10" height="2" viewBox="0 0 10 2" fill="currentColor"><rect width="10" height="2" rx="1"/></svg>
+          </button>
+          <button class="win-btn close-btn" id="btn-close" title="Close">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M1 1l8 8M9 1L1 9"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Body -->
+      <main class="widget-body">
+        
+        <!-- Live Counter & Stats row -->
+        <div class="hero-section">
+          <div class="counter-display">
+            <div class="counter-val" id="strokes-today-val">0</div>
+            <div class="counter-lbl">today</div>
+          </div>
+          
+          <div class="metrics-row">
+            <div class="metric-item">
+              <span class="metric-lbl">Daily Avg</span>
+              <span class="metric-val" id="avg-strokes-val">0</span>
+            </div>
+            <div class="metric-divider"></div>
+            <div class="metric-item">
+              <span class="metric-lbl">Speed</span>
+              <span class="metric-val" id="current-speed-val">0.0 K/S</span>
+            </div>
+            <div class="metric-divider"></div>
+            <div class="metric-item">
+              <span class="metric-lbl">Goal</span>
+              <span class="metric-val" id="progress-pct-val">0.0%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7-Day Chart -->
+        <div class="chart-section">
+          <div class="chart-wrapper">
+            <svg id="history-chart" width="100%" height="45" viewBox="0 0 340 45" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="var(--primary-color)" stop-opacity="1" />
+                  <stop offset="100%" stop-color="var(--primary-color)" stop-opacity="0.2" />
+                </linearGradient>
+              </defs>
+              <g id="chart-bars-group"></g>
+            </svg>
+          </div>
+        </div>
+
+      </main>
+
+      <!-- Settings Panel -->
+      <div class="settings-overlay" id="settings-panel">
+        <div class="settings-header" data-tauri-drag-region>
+          <span class="settings-title" data-tauri-drag-region>Settings</span>
+          <button class="close-settings" id="btn-close-settings">
+            <svg width="12" height="12" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M1 1l8 8M9 1L1 9"/></svg>
+          </button>
+        </div>
+        <div class="settings-body">
+          <div class="form-group">
+            <label for="input-daily-goal">Daily Goal</label>
+            <input type="number" id="input-daily-goal" placeholder="e.g. 5000" min="100" max="1000000" />
+          </div>
+
+          <div class="form-group">
+            <label>Theme</label>
+            <div class="theme-picker">
+              <button class="theme-opt cyan active" data-theme="theme-cyan" title="Cyan"></button>
+              <button class="theme-opt orange" data-theme="theme-orange" title="Amber"></button>
+              <button class="theme-opt green" data-theme="theme-green" title="Mint"></button>
+              <button class="theme-opt magenta" data-theme="theme-magenta" title="Orchid"></button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="input-opacity">HUD Opacity</label>
+            <div class="slider-wrapper">
+              <input type="range" id="input-opacity" min="20" max="100" value="100" />
+              <span id="opacity-val-display">100%</span>
+            </div>
+          </div>
+
+          <div class="toggle-group">
+            <label for="input-always-on-top" class="checkbox-label">
+              <input type="checkbox" id="input-always-on-top" />
+              <span>Always on Top</span>
+            </label>
+          </div>
+
+          <div class="toggle-group">
+            <label for="input-autostart" class="checkbox-label">
+              <input type="checkbox" id="input-autostart" />
+              <span>Launch on startup</span>
+            </label>
+          </div>
+          
+          <!-- Hidden inputs to prevent JS crashes on removed CRT/Grid elements -->
+          <div style="display: none;">
+            <input type="checkbox" id="input-crt" />
+            <input type="checkbox" id="input-grid" />
+          </div>
+
+          <div class="settings-actions">
+            <button class="cyber-btn" id="btn-save-settings">Save Changes</button>
+            
+            <div class="utility-actions">
+              <button class="utility-btn" id="btn-check-updates-manual">Check Updates</button>
+              <button class="utility-btn danger" id="btn-clear-history">Purge Data</button>
+            </div>
+            
+            <span id="manual-check-status"></span>
+          </div>
+
+          <!-- Dynamic update banner inside settings -->
+          <div class="update-banner" id="update-banner" style="display: none;">
+            <span class="banner-text">Update available: <span id="update-banner-ver">v0.0.0</span></span>
+            <button class="cyber-btn" id="btn-banner-update">Install</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Update Modal -->
+      <div class="update-overlay" id="update-prompt">
+        <div class="update-modal">
+          <div class="update-header">
+            <span class="tech-text">Update Available</span>
+          </div>
+          <div class="update-body">
+            <p>Version <span id="update-version-val" style="color: var(--primary-color);">x.y.z</span> has been released.</p>
+            <p class="warning-text">The application will reboot after installing.</p>
+          </div>
+          <div class="update-controls">
+            <button class="cyber-btn" id="btn-confirm-update">Install Now</button>
+            <button class="cyber-btn cancel-btn" id="btn-cancel-update">Later</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
