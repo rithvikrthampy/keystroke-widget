@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "KeystrokeTracker",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "identifier": "com.user.keystroketracker",
   "build": {
     "frontendDist": "../src"
@@ -45,7 +45,7 @@
       "endpoints": [
         "https://github.com/rithvikrthampy/keystroke-widget/releases/latest/download/latest.json"
       ],
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEY4MzYxRTA5QzRFNDVFNkIKUldSclh1VEVDUjQyK0NEY3ZLdmMvWGsxL1NzU2lYRHp2NXo5Tkt6SG81cnRReW90SCtseit4UkIK"
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDMyQjk1RDc0NjNDNEQ0MzIKUldReTFNUmpkRjI1TWtjcUlTSGF4UVpKYm9FWUYyK2lBVWxNUzBhWnY1eWRlZlZLVndFNlowMTkK"
     }
   }
 }
