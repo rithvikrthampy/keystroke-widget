@@ -43,7 +43,7 @@
   "plugins": {
     "updater": {
       "endpoints": [
-        "https://raw.githubusercontent.com/rithvikrthampy/keystroke-widget/main/update.json"
+        "https://github.com/rithvikrthampy/keystroke-widget/releases/latest/download/latest.json"
       ],
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEY4MzYxRTA5QzRFNDVFNkIKUldSclh1VEVDUjQyK0NEY3ZLdmMvWGsxL1NzU2lYRHp2NXo5Tkt6SG81cnRReW90SCtseit4UkIK"
     }
