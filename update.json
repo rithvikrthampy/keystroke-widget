@@ -1,11 +1,11 @@
 {
-  "version": "0.0.11",
-  "notes": "Keystroke Tracker version 0.0.11 update description.",
-  "pub_date": "2026-07-21T09:40:00Z",
+  "version": "0.0.12",
+  "notes": "Keystroke Tracker version 0.0.12 update description.",
+  "pub_date": "2026-07-22T08:30:00Z",
   "platforms": {
     "windows-x86_64": {
       "signature": "PLACEHOLDER_SIGNATURE_FROM_TAURI_ACTION_OR_CLI_BUILD",
-      "url": "https://github.com/rithvikrthampy/keystroke-widget/releases/download/v0.0.11/KeystrokeTracker_0.0.11_x64_en-US.msi.zip"
+      "url": "https://github.com/rithvikrthampy/keystroke-widget/releases/download/v0.0.12/KeystrokeTracker_0.0.12_x64_en-US.msi.zip"
     }
   }
 }
